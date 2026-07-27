@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Playfair_Display, Questrial } from "next/font/google";
-import { BIZ, SERVICES } from "./data";
+import { BIZ, FAQS } from "./data";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -18,54 +18,58 @@ const questrial = Questrial({
   display: "swap",
 });
 
-// Canonical page for the Alexandra Hills practice. Update if this deploys elsewhere.
+// CONFIRM BEFORE GO-LIVE: canonical URL for this veneers landing page.
+// Must match wherever the page is actually deployed.
 const CANONICAL =
-  "https://www.sparklingwhitedental.com.au/locations/dentists-in-alexandra-hills/";
+  "https://www.sparklingwhitedental.com.au/alexandra-hills-veneers/";
+// TODO: swap for a veneers-specific social image when one is available.
 const OG_IMAGE =
   "https://www.sparklingwhitedental.com.au/wp-content/uploads/2024/07/Affordable-Dentists-in-Alexandra-Hills-1-modified.webp";
 
+const TITLE = "Porcelain Veneers Alexandra Hills | Sparkling White Dental";
+const DESCRIPTION =
+  "Custom porcelain veneers in Alexandra Hills, Brisbane. See real before & after results. Flexible payment plans. Book your free consultation today.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.sparklingwhitedental.com.au"),
-  title: "Alexandra Hills Dentist Brisbane | Sparkling White Dental",
-  description:
-    "Trusted family dentist in Alexandra Hills for 45 years. General, cosmetic & emergency dentistry, implants, orthodontics & same-day crowns. Payment plans.",
+  title: TITLE,
+  description: DESCRIPTION,
   keywords: [
-    "dentist Alexandra Hills",
-    "Alexandra Hills dentist",
-    "emergency dentist Alexandra Hills",
-    "family dentist Redlands",
-    "dental implants Alexandra Hills",
-    "same-day crowns Alexandra Hills",
-    "children's dentist Alexandra Hills",
-    "teeth whitening Redlands",
+    "veneers Alexandra Hills",
+    "porcelain veneers Alexandra Hills",
+    "composite veneers Alexandra Hills",
+    "dental veneers Redland City",
+    "cosmetic dentist Alexandra Hills",
+    "smile makeover Alexandra Hills",
+    "fix chipped teeth Alexandra Hills",
+    "veneers cost Brisbane",
   ],
-  authors: [{ name: "Sparkling White Dental" }],
-  creator: "Sparkling White Dental",
-  publisher: "Sparkling White Dental",
+  authors: [{ name: BIZ.name }],
+  creator: BIZ.name,
+  publisher: BIZ.name,
   category: "Dentist",
   alternates: { canonical: CANONICAL },
   openGraph: {
-    title: "Dentists in Alexandra Hills | Sparkling White Dental",
+    title: TITLE,
     description:
-      "45 years of trusted dental care in Alexandra Hills. Comprehensive, gentle care under one roof. Interest-free payment plans available.",
+      "Custom porcelain veneers in Alexandra Hills — fix chips, gaps and staining. Real before & after results, flexible payment plans, free consultation.",
     url: CANONICAL,
-    siteName: "Sparkling White Dental",
+    siteName: BIZ.name,
     type: "website",
     locale: "en_AU",
     images: [
       {
         url: OG_IMAGE,
         width: 812,
-        height: 510,
-        alt: "A happy patient at Sparkling White Dental, Alexandra Hills",
+        height: 812,
+        alt: `Dr Bikramjit at ${BIZ.name}, ${BIZ.location}`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dentists in Alexandra Hills | Sparkling White Dental",
-    description:
-      "Your trusted family dentist in Alexandra Hills for 45 years. Book online or call (07) 3824 2484.",
+    title: TITLE,
+    description: `Porcelain veneers in Alexandra Hills. Book your free consultation — call ${BIZ.phone}.`,
     images: [OG_IMAGE],
   },
   robots: {
@@ -81,14 +85,12 @@ export const viewport: Viewport = {
   themeColor: "#0082b3",
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
+const dentistLd = {
   "@type": "Dentist",
   "@id": `${CANONICAL}#dentist`,
-  name: "Sparkling White Dental — Alexandra Hills",
-  alternateName: "Dentists in Alexandra Hills",
+  name: `${BIZ.name} — ${BIZ.location}`,
   description:
-    "Trusted family dentist in Alexandra Hills for 45 years. General, cosmetic and emergency dentistry, implants, orthodontics, same-day crowns and children's dentistry, led by Dr. Bik.",
+    "Porcelain and composite veneers in Alexandra Hills, Brisbane. Custom-made veneers to correct chips, gaps and staining, led by Dr Bikramjit with more than 30 years of experience.",
   url: CANONICAL,
   telephone: "+61738242484",
   image: OG_IMAGE,
@@ -109,7 +111,6 @@ const jsonLd = {
     { "@type": "Place", name: "Capalaba" },
     { "@type": "Place", name: "Redland City" },
   ],
-  sameAs: [BIZ.facebook, BIZ.instagram],
   medicalSpecialty: "Dentistry",
   aggregateRating: {
     "@type": "AggregateRating",
@@ -118,10 +119,32 @@ const jsonLd = {
     bestRating: "5",
     worstRating: "1",
   },
-  availableService: SERVICES.map((s) => ({
-    "@type": "MedicalProcedure",
-    name: s.name,
+  availableService: [
+    { "@type": "MedicalProcedure", name: "Porcelain Veneers" },
+    { "@type": "MedicalProcedure", name: "Composite Veneers" },
+    { "@type": "MedicalProcedure", name: "Cosmetic Dentistry" },
+  ],
+  employee: {
+    "@type": "Person",
+    name: "Dr Bikramjit",
+    jobTitle: "Principal Dentist",
+  },
+};
+
+// FAQPage markup for the on-page FAQs — eligible for rich results.
+const faqLd = {
+  "@type": "FAQPage",
+  "@id": `${CANONICAL}#faq`,
+  mainEntity: FAQS.items.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
   })),
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [dentistLd, faqLd],
 };
 
 export default function RootLayout({
