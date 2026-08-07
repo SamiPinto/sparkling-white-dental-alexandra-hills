@@ -62,7 +62,7 @@ export const metadata: Metadata = {
         url: OG_IMAGE,
         width: 812,
         height: 812,
-        alt: `Dr Bikramjit at ${BIZ.name}, ${BIZ.location}`,
+        alt: `Dr Bikramjit (Dr Bik Sandhu) at ${BIZ.name}, ${BIZ.location}`,
       },
     ],
   },
@@ -90,7 +90,7 @@ const dentistLd = {
   "@id": `${CANONICAL}#dentist`,
   name: `${BIZ.name} — ${BIZ.location}`,
   description:
-    "Porcelain and composite veneers in Alexandra Hills, Brisbane. Custom-made veneers to correct chips, gaps and staining, led by Dr Bikramjit with more than 30 years of experience.",
+    "Porcelain and composite veneers in Alexandra Hills, Brisbane. Custom-made veneers to correct chips, gaps and staining, led by Dr Bikramjit (Dr Bik Sandhu) with more than 30 years of experience.",
   url: CANONICAL,
   telephone: "+61738242484",
   image: OG_IMAGE,
@@ -126,7 +126,8 @@ const dentistLd = {
   ],
   employee: {
     "@type": "Person",
-    name: "Dr Bikramjit",
+    name: "Dr Bikramjit Sandhu",
+    alternateName: "Dr Bik Sandhu",
     jobTitle: "Principal Dentist",
   },
 };
