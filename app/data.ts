@@ -1,10 +1,15 @@
 // Central data for the Alexandra Hills VENEERS landing page (content brief v2).
 // Copy is taken verbatim from the client-supplied brief.
 
+// `location` is the machine-facing name — it keys the Google Sheet tab and the
+// lead email subject, so it stays bare. `locationDisplay` is what the page
+// shows; it disambiguates the suburb for people outside Brisbane.
 export const BIZ = {
   name: "Sparkling White Dental",
   location: "Alexandra Hills",
+  locationDisplay: "Alexandra Hills (Brisbane)",
   city: "Brisbane",
+  postcode: "4161",
   phone: "(07) 3824 2484",
   phoneHref: "tel:+61738242484",
   address: "1 Bluebell St, Alexandra Hills QLD 4161",
@@ -27,7 +32,7 @@ export const TRACKING = {
 };
 
 export const HERO = {
-  eyebrow: "Porcelain Veneers · Alexandra Hills",
+  eyebrow: "Porcelain Veneers · Alexandra Hills (Brisbane)",
   headline: "Love the Smile You See in the",
   headlineAccent: "Mirror",
   hook: "Do you hide your smile?",
@@ -140,7 +145,7 @@ export const DOCTOR = {
   body: "With more than 30 years of experience, Dr Bikramjit (Dr Bik Sandhu) and the team at Sparkling White Dental Alexandra Hills are known for gentle, unhurried care. We listen first, aim to answer all your questions in your free, person-to-person consultation, and only ever recommend what you actually need.",
   photo: "/images/dr-bik.webp",
   capName: "Dr Bikramjit (Dr Bik Sandhu)",
-  capRole: "Principal Dentist · Alexandra Hills clinic",
+  capRole: "Principal Dentist · Alexandra Hills (Brisbane) clinic",
   statBig: "30+",
   statSmall: "Years of experience",
 };
